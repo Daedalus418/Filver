@@ -1,0 +1,19 @@
+{
+  "name": "filver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daedalus418/Filver.git"
+  },
+  "author": "gaelle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daedalus418/Filver/issues"
+  },
+  "homepage": "https://github.com/Daedalus418/Filver#readme"
+}
