@@ -40,23 +40,51 @@ let ticket = [{
     "quantité": 5
 }];
 
-let totalHT = 0, prodQttTTC = 0, prodUnTTC = 0, totalTTC = 0;
-for (let i in ticket) {
-    let prodQttHT = ticket[i].prix * ticket[i].quantité;
-    totalHT += prodQttHT;
-    console.log(ticket[i].nom);
-    console.log('Hors taxe, 1 ' + ticket[i].nom + ' = ' + ticket[i].prix + '€ HT');
-    console.log('Hors taxe, ' + ticket[i].quantité + ' ' + ticket[i].nom + ' = ' + prodQttHT + '€ HT');
-    if (ticket[i].tva == 1) {
-        prodQttTTC = prodQttHT + (prodQttHT * 0.055);
-        prodUnTTC = ticket[i].prix + (ticket[i].prix * 0.055);
-    } else {
-        prodQttTTC = prodQttHT + (prodQttHT * 0.2);
-        prodUnTTC = ticket[i].prix + (ticket[i].prix * 0.2);
-    }
-    totalTTC += prodQttTTC;
-    console.log('Toutes taxes comprises, 1 ' + ticket[i].nom + ' = ' + prodUnTTC.toFixed(2) + '€ TTC');
-    console.log('Toutes taxes comprises, ' + ticket[i].quantité + ' ' + ticket[i].nom + ' = ' + prodQttTTC.toFixed(2) + '€ TTC');
-}
-console.log('total hors taxe = ' + totalHT + '€');
-console.log('total toutes taxes comprises = ' + totalTTC.toFixed(2) + '€');
+// let totalHT = 0, prodQttTTC = 0, prodUnTTC = 0, totalTTC = 0;
+// for (let i in ticket) {
+//     let prodQttHT = ticket[i].prix * ticket[i].quantité;
+//     totalHT += prodQttHT;
+//     console.log(ticket[i].nom);
+//     console.log('Hors taxe, 1 ' + ticket[i].nom + ' = ' + ticket[i].prix + '€ HT');
+//     console.log('Hors taxe, ' + ticket[i].quantité + ' ' + ticket[i].nom + ' = ' + prodQttHT + '€ HT');
+//     if (ticket[i].tva === 1) {
+//         prodQttTTC = prodQttHT + (prodQttHT * 0.055);
+//         prodUnTTC = ticket[i].prix + (ticket[i].prix * 0.055);
+//     } else {
+//         prodQttTTC = prodQttHT + (prodQttHT * 0.2);
+//         prodUnTTC = ticket[i].prix + (ticket[i].prix * 0.2);
+//     }
+//     totalTTC += prodQttTTC;
+//     console.log('Toutes taxes comprises, 1 ' + ticket[i].nom + ' = ' + prodUnTTC.toFixed(2) + '€ TTC');
+//     console.log('Toutes taxes comprises, ' + ticket[i].quantité + ' ' + ticket[i].nom + ' = ' + prodQttTTC.toFixed(2) + '€ TTC');
+// }
+// console.log('total hors taxe = ' + totalHT + '€');
+// console.log('total toutes taxes comprises = ' + totalTTC.toFixed(2) + '€');
+
+
+$(document).ready(function() {
+    $('#calcul').on('click', function() {
+        let totalHT = 0, prodQttTTC = 0, prodUnTTC = 0, totalTTC = 0;
+        $(ticket).each(function(index) {
+            for (let i in ticket) {
+                let prodQttHT = ticket[i].prix * ticket[i].quantité;
+                totalHT += prodQttHT;
+                $("#result ul").append('<li>' + this.nom + '</li>');
+                $("#result ul").append('<li>1 ' + this.nom + ': ' + this.prix + '€ HT</li>');
+                $("#result ul").append('<li>' + this.quantité + ' ' + this.nom + ' = ' + prodQttHT.toFixed(2) + '€ HT</li>');
+                if (ticket[i].tva === 1) {
+                    prodQttTTC = prodQttHT + (prodQttHT * 0.055);
+                    prodUnTTC = ticket[i].prix + (ticket[i].prix * 0.055);
+                } else {
+                    prodQttTTC = prodQttHT + (prodQttHT * 0.2);
+                    prodUnTTC = ticket[i].prix + (ticket[i].prix * 0.2);
+                }
+                totalTTC += prodQttTTC;
+                $("#result ul").append('<li>1 ' + this.nom + ': ' + prodUnTTC.toFixed(2) + '€ TTC</li>');
+                $("#result ul").append('<li>' + this.quantité + ' ' + this.nom + ': ' + prodQttTTC.toFixed(2) + '€ TTC</li>');
+            }
+        });
+        $("#result ul").append('total hors taxe = ' + totalHT.toFixed(2) + '€');
+        $("#result ul").append('total toutes taxes comprises: ' + totalTTC.toFixed(2) + '€');
+    });
+});
