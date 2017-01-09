@@ -40,3 +40,23 @@ let ticket = [
 		"quantité": 5
 	}
 ];
+
+/*Total Hors Taxe*/
+let totalHT = 0;
+for (let i in ticket) {
+  totalHT += ticket[i].prix*ticket[i].quantité;
+}
+console.log(totalHT);
+
+/*prix HT par produit en fonction de sa quantité*/
+let prodQttHT = 0;
+for (let i in ticket) {
+  prodQttHT = ticket[i].prix*ticket[i].quantité;
+  console.log(ticket[i].nom + ' = ' + prodQttHT);
+}
+
+/*prix HT par produit unitaire*/
+let prodUnHT = 0;
+for (let i in ticket) {
+  console.log('1 ' + ticket[i].nom + ': ' + ticket[i].prix);
+}
