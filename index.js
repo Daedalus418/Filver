@@ -40,11 +40,8 @@ let ticket = [{
     "quantité": 5
 }];
 
-let totalHT = 0;
-let prodQttTTC = 0;
-let prodUnTTC = 0;
-let totalTTC = 0;
-for (var i = 0; i < ticket.length; i++) {
+let totalHT = 0, prodQttTTC = 0, prodUnTTC = 0, totalTTC = 0;
+for (let i in ticket) {
     let prodQttHT = ticket[i].prix * ticket[i].quantité;
     totalHT += prodQttHT;
     console.log(ticket[i].nom);
