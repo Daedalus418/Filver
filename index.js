@@ -41,51 +41,27 @@ let ticket = [
 	}
 ];
 
-/*Total Hors Taxe*/
 let totalHT = 0;
-for (let i in ticket) {
-  totalHT += ticket[i].prix*ticket[i].quantité;
-}
-console.log(totalHT);
-
-/*prix HT par produit en fonction de sa quantité*/
-let prodQttHT = 0;
-for (let i in ticket) {
-  prodQttHT = ticket[i].prix*ticket[i].quantité;
-  console.log(ticket[i].nom + ' = ' + prodQttHT);
-}
-
-/*prix HT par produit unitaire*/
-let prodUnHT = 0;
-for (let i in ticket) {
-  console.log('1 ' + ticket[i].nom + ': ' + ticket[i].prix);
-}
-
-
-/*prix TTC par produit unitaire*/
-let prodUnTTC = 0;
-for (let i in ticket) {
-	if(ticket[i].tva === 1){
-		prodUnTTC = ticket[i].prix + (ticket[i].prix*0.055);
-	}
-	else{
-		prodUnTTC = ticket[i].prix + (ticket[i].prix*0.2);
-	}
-	console.log('1 ' + ticket[i].nom + ': ' + prodUnTTC);
-}
-
-/*prix TTC par produit en fonction de sa quantité + calcul du total TTC*/
 let prodQttTTC = 0;
+let prodUnTTC = 0;
 let totalTTC = 0;
-for (let i in ticket) {
-	prodQttTTC = ticket[i].prix*ticket[i].quantité;
-	if(ticket[i].tva == 1){
-		prodQttTTC = prodQttTTC + (prodQttTTC*0.055);
-	}
-	else{
-		prodQttTTC = prodQttTTC + (prodQttTTC*0.2);
-	}
-	totalTTC += prodQttTTC;
-	console.log(ticket[i].quantité + ' ' + ticket[i].nom + ': ' + prodQttTTC);
+for (var i = 0; i < ticket.length; i++) {
+  let prodQttHT = ticket[i].prix*ticket[i].quantité;
+  totalHT += prodQttHT;
+  console.log(ticket[i].nom);
+  console.log('Hors taxe, 1 ' + ticket[i].nom + ' = ' + ticket[i].prix + '€ HT');
+  console.log('Hors taxe, ' + ticket[i].quantité + ' ' + ticket[i].nom + ' = ' + prodQttHT + '€ HT');
+    if (ticket[i].tva == 1) {
+		  prodQttTTC = prodQttHT + (prodQttHT*0.055);
+      prodUnTTC = ticket[i].prix + (ticket[i].prix*0.055);
+	  }
+	  else {
+		  prodQttTTC = prodQttHT + (prodQttHT*0.2);
+      prodUnTTC = ticket[i].prix + (ticket[i].prix*0.2);
+	  }
+    totalTTC += prodQttTTC;
+    console.log('Toutes taxes comprises, 1 ' + ticket[i].nom + ' = ' + prodUnTTC.toFixed(2) + '€ TTC');
+	  console.log('Toutes taxes comprises, ' + ticket[i].quantité + ' ' + ticket[i].nom + ' = ' + prodQttTTC.toFixed(2) + '€ TTC');
 }
-console.log('total TTC: ' + totalTTC);
+console.log('total hors taxe = ' + totalHT + '€');
+console.log('total toutes taxes comprises = ' + totalTTC.toFixed(2) + '€');
