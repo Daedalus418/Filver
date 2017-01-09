@@ -60,3 +60,32 @@ let prodUnHT = 0;
 for (let i in ticket) {
   console.log('1 ' + ticket[i].nom + ': ' + ticket[i].prix);
 }
+
+
+/*prix TTC par produit unitaire*/
+let prodUnTTC = 0;
+for (let i in ticket) {
+	if(ticket[i].tva === 1){
+		prodUnTTC = ticket[i].prix + (ticket[i].prix*0.055);
+	}
+	else{
+		prodUnTTC = ticket[i].prix + (ticket[i].prix*0.2);
+	}
+	console.log('1 ' + ticket[i].nom + ': ' + prodUnTTC);
+}
+
+/*prix TTC par produit en fonction de sa quantité + calcul du total TTC*/
+let prodQttTTC = 0;
+let totalTTC = 0;
+for (let i in ticket) {
+	prodQttTTC = ticket[i].prix*ticket[i].quantité;
+	if(ticket[i].tva == 1){
+		prodQttTTC = prodQttTTC + (prodQttTTC*0.055);
+	}
+	else{
+		prodQttTTC = prodQttTTC + (prodQttTTC*0.2);
+	}
+	totalTTC += prodQttTTC;
+	console.log(ticket[i].quantité + ' ' + ticket[i].nom + ': ' + prodQttTTC);
+}
+console.log('total TTC: ' + totalTTC);
